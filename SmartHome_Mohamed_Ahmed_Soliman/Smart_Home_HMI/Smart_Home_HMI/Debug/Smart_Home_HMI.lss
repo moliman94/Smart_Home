@@ -1,0 +1,289 @@
+
+Smart_Home_HMI.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000182  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  000001d6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  000001d6  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000208  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000d0  00000000  00000000  00000244  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000a3a  00000000  00000000  00000314  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000007a1  00000000  00000000  00000d4e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000005af  00000000  00000000  000014ef  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  0000014c  00000000  00000000  00001aa0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000042c  00000000  00000000  00001bec  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000172  00000000  00000000  00002018  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000090  00000000  00000000  0000218a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 40 00 	call	0x80	; 0x80 <main>
+  64:	0c 94 bf 00 	jmp	0x17e	; 0x17e <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <Bluetooth_init>:
+
+#include "BLUETOOTH.h"
+
+void Bluetooth_init(void)
+{
+	UART_init(BAUDRATE);
+  6c:	60 e8       	ldi	r22, 0x80	; 128
+  6e:	75 e2       	ldi	r23, 0x25	; 37
+  70:	80 e0       	ldi	r24, 0x00	; 0
+  72:	90 e0       	ldi	r25, 0x00	; 0
+  74:	0e 94 79 00 	call	0xf2	; 0xf2 <UART_init>
+  78:	08 95       	ret
+
+0000007a <Bluetooth_receive>:
+}
+
+uint8 Bluetooth_receive(void)
+{
+	return UART_receive_char();
+  7a:	0e 94 bb 00 	call	0x176	; 0x176 <UART_receive_char>
+  7e:	08 95       	ret
+
+00000080 <main>:
+#include "SPI.h"
+
+int main(void)
+{
+	//-------------Initializations-------------------
+	SPI_master_init();
+  80:	0e 94 6c 00 	call	0xd8	; 0xd8 <SPI_master_init>
+	Bluetooth_init();
+  84:	0e 94 36 00 	call	0x6c	; 0x6c <Bluetooth_init>
+	
+	//-----------Periodic code-----------------------
+    while (1) 
+    {
+		//Read the bluetooth received message from mobile phone
+		messageID = Bluetooth_receive();
+  88:	0e 94 3d 00 	call	0x7a	; 0x7a <Bluetooth_receive>
+		
+		switch(messageID)
+  8c:	83 33       	cpi	r24, 0x33	; 51
+  8e:	81 f0       	breq	.+32     	; 0xb0 <main+0x30>
+  90:	28 f4       	brcc	.+10     	; 0x9c <main+0x1c>
+  92:	81 33       	cpi	r24, 0x31	; 49
+  94:	49 f0       	breq	.+18     	; 0xa8 <main+0x28>
+  96:	82 33       	cpi	r24, 0x32	; 50
+  98:	79 f0       	breq	.+30     	; 0xb8 <main+0x38>
+  9a:	f6 cf       	rjmp	.-20     	; 0x88 <main+0x8>
+  9c:	85 33       	cpi	r24, 0x35	; 53
+  9e:	a1 f0       	breq	.+40     	; 0xc8 <main+0x48>
+  a0:	78 f0       	brcs	.+30     	; 0xc0 <main+0x40>
+  a2:	86 33       	cpi	r24, 0x36	; 54
+  a4:	a9 f0       	breq	.+42     	; 0xd0 <main+0x50>
+  a6:	f0 cf       	rjmp	.-32     	; 0x88 <main+0x8>
+		{
+			case ROOM1_TURN_ON:
+			SPI_send_char(ROOM1_TURN_ON);
+  a8:	81 e3       	ldi	r24, 0x31	; 49
+  aa:	0e 94 75 00 	call	0xea	; 0xea <SPI_send_char>
+			break;
+  ae:	ec cf       	rjmp	.-40     	; 0x88 <main+0x8>
+			
+			case ROOM1_TURN_OFF:
+			SPI_send_char(ROOM1_TURN_OFF);
+  b0:	83 e3       	ldi	r24, 0x33	; 51
+  b2:	0e 94 75 00 	call	0xea	; 0xea <SPI_send_char>
+			break;
+  b6:	e8 cf       	rjmp	.-48     	; 0x88 <main+0x8>
+			
+			case ROOM2_TURN_ON:
+			SPI_send_char(ROOM2_TURN_ON);
+  b8:	82 e3       	ldi	r24, 0x32	; 50
+  ba:	0e 94 75 00 	call	0xea	; 0xea <SPI_send_char>
+			break;
+  be:	e4 cf       	rjmp	.-56     	; 0x88 <main+0x8>
+			
+			case ROOM2_TURN_OFF:
+			SPI_send_char(ROOM2_TURN_OFF);
+  c0:	84 e3       	ldi	r24, 0x34	; 52
+  c2:	0e 94 75 00 	call	0xea	; 0xea <SPI_send_char>
+			break;
+  c6:	e0 cf       	rjmp	.-64     	; 0x88 <main+0x8>
+			
+			case DOOR_OPEN:
+			SPI_send_char(DOOR_OPEN);
+  c8:	85 e3       	ldi	r24, 0x35	; 53
+  ca:	0e 94 75 00 	call	0xea	; 0xea <SPI_send_char>
+			break;
+  ce:	dc cf       	rjmp	.-72     	; 0x88 <main+0x8>
+			
+			case DOOR_CLOSE:
+			SPI_send_char(DOOR_CLOSE);
+  d0:	86 e3       	ldi	r24, 0x36	; 54
+  d2:	0e 94 75 00 	call	0xea	; 0xea <SPI_send_char>
+			break;
+  d6:	d8 cf       	rjmp	.-80     	; 0x88 <main+0x8>
+
+000000d8 <SPI_master_init>:
+	
+	//enable SPI
+	SPCR |= (1<<SPE);
+	
+	CLRBIT(SPCR, CPOL);       //make SCK low when idle state
+	CLRBIT(SPCR, CPHA);       //sample data on leading edge
+  d8:	87 b3       	in	r24, 0x17	; 23
+  da:	80 6b       	ori	r24, 0xB0	; 176
+  dc:	87 bb       	out	0x17, r24	; 23
+  de:	8d b1       	in	r24, 0x0d	; 13
+  e0:	80 65       	ori	r24, 0x50	; 80
+  e2:	8d b9       	out	0x0d, r24	; 13
+  e4:	6b 98       	cbi	0x0d, 3	; 13
+  e6:	6a 98       	cbi	0x0d, 2	; 13
+  e8:	08 95       	ret
+
+000000ea <SPI_send_char>:
+}
+
+void SPI_send_char(uint8 data)
+{
+	SPDR = data;
+  ea:	8f b9       	out	0x0f, r24	; 15
+	while(READBIT(SPSR, SPIF) == 0);   //wait for transmission complete
+  ec:	77 9b       	sbis	0x0e, 7	; 14
+  ee:	fe cf       	rjmp	.-4      	; 0xec <SPI_send_char+0x2>
+}
+  f0:	08 95       	ret
+
+000000f2 <UART_init>:
+	while(!(UCSRA & (1<<UDRE)));         //wait for transmit buffer to be ready to receive new data
+	UCSRB &= ~(1<<TXB8);
+	if (data & 0x0100)                   //monitor 9th bit
+		UCSRB |= (1<<TXB8);
+	/* Put data into buffer, sends the data */
+	UDR = data;
+  f2:	2a b1       	in	r18, 0x0a	; 10
+  f4:	28 61       	ori	r18, 0x18	; 24
+  f6:	2a b9       	out	0x0a, r18	; 10
+  f8:	20 b5       	in	r18, 0x20	; 32
+  fa:	2f 77       	andi	r18, 0x7F	; 127
+  fc:	20 bd       	out	0x20, r18	; 32
+  fe:	60 3c       	cpi	r22, 0xC0	; 192
+ 100:	22 e1       	ldi	r18, 0x12	; 18
+ 102:	72 07       	cpc	r23, r18
+ 104:	81 05       	cpc	r24, r1
+ 106:	91 05       	cpc	r25, r1
+ 108:	19 f4       	brne	.+6      	; 0x110 <UART_init+0x1e>
+ 10a:	8f ec       	ldi	r24, 0xCF	; 207
+ 10c:	89 b9       	out	0x09, r24	; 9
+ 10e:	22 c0       	rjmp	.+68     	; 0x154 <UART_init+0x62>
+ 110:	60 38       	cpi	r22, 0x80	; 128
+ 112:	25 e2       	ldi	r18, 0x25	; 37
+ 114:	72 07       	cpc	r23, r18
+ 116:	81 05       	cpc	r24, r1
+ 118:	91 05       	cpc	r25, r1
+ 11a:	19 f4       	brne	.+6      	; 0x122 <UART_init+0x30>
+ 11c:	87 e6       	ldi	r24, 0x67	; 103
+ 11e:	89 b9       	out	0x09, r24	; 9
+ 120:	19 c0       	rjmp	.+50     	; 0x154 <UART_init+0x62>
+ 122:	61 15       	cp	r22, r1
+ 124:	2b e4       	ldi	r18, 0x4B	; 75
+ 126:	72 07       	cpc	r23, r18
+ 128:	81 05       	cpc	r24, r1
+ 12a:	91 05       	cpc	r25, r1
+ 12c:	19 f4       	brne	.+6      	; 0x134 <UART_init+0x42>
+ 12e:	83 e3       	ldi	r24, 0x33	; 51
+ 130:	89 b9       	out	0x09, r24	; 9
+ 132:	10 c0       	rjmp	.+32     	; 0x154 <UART_init+0x62>
+ 134:	60 38       	cpi	r22, 0x80	; 128
+ 136:	20 e7       	ldi	r18, 0x70	; 112
+ 138:	72 07       	cpc	r23, r18
+ 13a:	81 05       	cpc	r24, r1
+ 13c:	91 05       	cpc	r25, r1
+ 13e:	19 f4       	brne	.+6      	; 0x146 <UART_init+0x54>
+ 140:	82 e2       	ldi	r24, 0x22	; 34
+ 142:	89 b9       	out	0x09, r24	; 9
+ 144:	07 c0       	rjmp	.+14     	; 0x154 <UART_init+0x62>
+ 146:	61 15       	cp	r22, r1
+ 148:	72 4c       	sbci	r23, 0xC2	; 194
+ 14a:	81 40       	sbci	r24, 0x01	; 1
+ 14c:	91 05       	cpc	r25, r1
+ 14e:	11 f4       	brne	.+4      	; 0x154 <UART_init+0x62>
+ 150:	88 e0       	ldi	r24, 0x08	; 8
+ 152:	89 b9       	out	0x09, r24	; 9
+ 154:	80 b5       	in	r24, 0x20	; 32
+ 156:	80 68       	ori	r24, 0x80	; 128
+ 158:	80 bd       	out	0x20, r24	; 32
+ 15a:	80 b5       	in	r24, 0x20	; 32
+ 15c:	8f 7b       	andi	r24, 0xBF	; 191
+ 15e:	80 bd       	out	0x20, r24	; 32
+ 160:	80 b5       	in	r24, 0x20	; 32
+ 162:	8f 7c       	andi	r24, 0xCF	; 207
+ 164:	80 bd       	out	0x20, r24	; 32
+ 166:	80 b5       	in	r24, 0x20	; 32
+ 168:	87 7f       	andi	r24, 0xF7	; 247
+ 16a:	80 bd       	out	0x20, r24	; 32
+ 16c:	52 98       	cbi	0x0a, 2	; 10
+ 16e:	80 b5       	in	r24, 0x20	; 32
+ 170:	86 60       	ori	r24, 0x06	; 6
+ 172:	80 bd       	out	0x20, r24	; 32
+ 174:	08 95       	ret
+
+00000176 <UART_receive_char>:
+}
+
+uint8 UART_receive_char()
+{
+	while(!(UCSRA & (1<<RXC)));        //wait until there is data need to be read
+ 176:	5f 9b       	sbis	0x0b, 7	; 11
+ 178:	fe cf       	rjmp	.-4      	; 0x176 <UART_receive_char>
+	return UDR;
+ 17a:	8c b1       	in	r24, 0x0c	; 12
+}
+ 17c:	08 95       	ret
+
+0000017e <_exit>:
+ 17e:	f8 94       	cli
+
+00000180 <__stop_program>:
+ 180:	ff cf       	rjmp	.-2      	; 0x180 <__stop_program>

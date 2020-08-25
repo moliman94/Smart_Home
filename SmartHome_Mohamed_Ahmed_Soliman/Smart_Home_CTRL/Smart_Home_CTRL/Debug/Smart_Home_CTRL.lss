@@ -1,0 +1,400 @@
+
+Smart_Home_CTRL.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000001be  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000002  00800060  000001be  00000252  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000002  00800062  00800062  00000254  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000254  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000284  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000100  00000000  00000000  000002c0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000a34  00000000  00000000  000003c0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000712  00000000  00000000  00000df4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000667  00000000  00000000  00001506  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000188  00000000  00000000  00001b70  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000439  00000000  00000000  00001cf8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000088  00000000  00000000  00002131  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 000000b0  00000000  00000000  000021b9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 83 00 	jmp	0x106	; 0x106 <__vector_7>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ee eb       	ldi	r30, 0xBE	; 190
+  68:	f1 e0       	ldi	r31, 0x01	; 1
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a2 36       	cpi	r26, 0x62	; 98
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	a2 e6       	ldi	r26, 0x62	; 98
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a4 36       	cpi	r26, 0x64	; 100
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 49 00 	call	0x92	; 0x92 <main>
+  8a:	0c 94 dd 00 	jmp	0x1ba	; 0x1ba <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <main>:
+
+extern uint8 door_status;
+
+int main(void)
+{
+    SPI_slave_init();
+  92:	0e 94 bc 00 	call	0x178	; 0x178 <SPI_slave_init>
+	LED_init();
+  96:	0e 94 72 00 	call	0xe4	; 0xe4 <LED_init>
+	servo_init();
+  9a:	0e 94 7d 00 	call	0xfa	; 0xfa <servo_init>
+			case DOOR_OPEN:
+			door_status = DOOR_OPENED;
+			break;
+			
+			case DOOR_CLOSE:
+			door_status = DOOR_CLOSED;
+  9e:	c1 e0       	ldi	r28, 0x01	; 1
+	uint8 messageID;
+	
+
+    while (1) 
+    {
+		messageID = SPI_receive_char();
+  a0:	0e 94 c1 00 	call	0x182	; 0x182 <SPI_receive_char>
+		switch(messageID)
+  a4:	83 33       	cpi	r24, 0x33	; 51
+  a6:	79 f0       	breq	.+30     	; 0xc6 <main+0x34>
+  a8:	28 f4       	brcc	.+10     	; 0xb4 <main+0x22>
+  aa:	81 33       	cpi	r24, 0x31	; 49
+  ac:	49 f0       	breq	.+18     	; 0xc0 <main+0x2e>
+  ae:	82 33       	cpi	r24, 0x32	; 50
+  b0:	69 f0       	breq	.+26     	; 0xcc <main+0x3a>
+  b2:	f6 cf       	rjmp	.-20     	; 0xa0 <main+0xe>
+  b4:	85 33       	cpi	r24, 0x35	; 53
+  b6:	81 f0       	breq	.+32     	; 0xd8 <main+0x46>
+  b8:	60 f0       	brcs	.+24     	; 0xd2 <main+0x40>
+  ba:	86 33       	cpi	r24, 0x36	; 54
+  bc:	81 f0       	breq	.+32     	; 0xde <main+0x4c>
+  be:	f0 cf       	rjmp	.-32     	; 0xa0 <main+0xe>
+		{
+			case ROOM1_TURN_ON:
+			LED1_On();
+  c0:	0e 94 75 00 	call	0xea	; 0xea <LED1_On>
+			break;
+  c4:	ed cf       	rjmp	.-38     	; 0xa0 <main+0xe>
+			
+			case  ROOM1_TURN_OFF:
+			LED1_Off();
+  c6:	0e 94 77 00 	call	0xee	; 0xee <LED1_Off>
+			break;
+  ca:	ea cf       	rjmp	.-44     	; 0xa0 <main+0xe>
+			
+			case  ROOM2_TURN_ON:
+			LED2_On();
+  cc:	0e 94 79 00 	call	0xf2	; 0xf2 <LED2_On>
+			break;
+  d0:	e7 cf       	rjmp	.-50     	; 0xa0 <main+0xe>
+			
+			case  ROOM2_TURN_OFF:
+			LED2_Off();
+  d2:	0e 94 7b 00 	call	0xf6	; 0xf6 <LED2_Off>
+			break;
+  d6:	e4 cf       	rjmp	.-56     	; 0xa0 <main+0xe>
+			
+			case DOOR_OPEN:
+			door_status = DOOR_OPENED;
+  d8:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+			break;
+  dc:	e1 cf       	rjmp	.-62     	; 0xa0 <main+0xe>
+			
+			case DOOR_CLOSE:
+			door_status = DOOR_CLOSED;
+  de:	c0 93 60 00 	sts	0x0060, r28	; 0x800060 <__DATA_REGION_ORIGIN__>
+			break;
+  e2:	de cf       	rjmp	.-68     	; 0xa0 <main+0xe>
+
+000000e4 <LED_init>:
+{
+	CLRBIT(LED1_PORT, LED1_PIN);
+}
+void LED1_Tog(void)
+{
+	TOGBIT(LED1_PORT, LED1_PIN);
+  e4:	a1 9a       	sbi	0x14, 1	; 20
+  e6:	8a 9a       	sbi	0x11, 2	; 17
+  e8:	08 95       	ret
+
+000000ea <LED1_On>:
+  ea:	a9 9a       	sbi	0x15, 1	; 21
+  ec:	08 95       	ret
+
+000000ee <LED1_Off>:
+  ee:	a9 98       	cbi	0x15, 1	; 21
+  f0:	08 95       	ret
+
+000000f2 <LED2_On>:
+}
+void LED2_On(void)
+{
+	SETBIT(LED2_PORT, LED2_PIN);
+  f2:	92 9a       	sbi	0x12, 2	; 18
+  f4:	08 95       	ret
+
+000000f6 <LED2_Off>:
+}
+void LED2_Off(void)
+{
+	CLRBIT(LED2_PORT, LED2_PIN);
+  f6:	92 98       	cbi	0x12, 2	; 18
+  f8:	08 95       	ret
+
+000000fa <servo_init>:
+
+uint8 door_status = DOOR_CLOSED;
+
+void servo_init(void)
+{
+	SETBIT(SERVO_PORT, SERVO_PIN);
+  fa:	95 9a       	sbi	0x12, 5	; 18
+	timer_1A_ctc_init();
+  fc:	0e 94 c5 00 	call	0x18a	; 0x18a <timer_1A_ctc_init>
+	timer_1A_start();
+ 100:	0e 94 d6 00 	call	0x1ac	; 0x1ac <timer_1A_start>
+ 104:	08 95       	ret
+
+00000106 <__vector_7>:
+  * T_high_count = (2ms * F_CPU)/Prescaler - 1 = (2ms * 16MHz)/8 - 1 = 3999
+  * T_low_count  = (18ms * F_CPU)/Prescaler - 1 = (18ms * 16MHz)/8 - 1 = 35999
+ */
+
+ISR(TIMER1_COMPA_vect)
+{
+ 106:	1f 92       	push	r1
+ 108:	0f 92       	push	r0
+ 10a:	0f b6       	in	r0, 0x3f	; 63
+ 10c:	0f 92       	push	r0
+ 10e:	11 24       	eor	r1, r1
+ 110:	8f 93       	push	r24
+ 112:	9f 93       	push	r25
+	static uint8 open_door_flag = 0;
+	static uint8 closed_door_flag = 0;
+	
+	//Open the door
+	//Servo go to 0 degree
+	if(door_status == DOOR_CLOSED)
+ 114:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 118:	81 30       	cpi	r24, 0x01	; 1
+ 11a:	99 f4       	brne	.+38     	; 0x142 <__vector_7+0x3c>
+	{
+		if(open_door_flag)
+ 11c:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <open_door_flag.1747>
+ 120:	88 23       	and	r24, r24
+ 122:	39 f0       	breq	.+14     	; 0x132 <__vector_7+0x2c>
+		{
+			open_door_flag = 0;
+ 124:	10 92 63 00 	sts	0x0063, r1	; 0x800063 <open_door_flag.1747>
+			OCR1A = NO_TICKS_MS(19);
+ 128:	8f e6       	ldi	r24, 0x6F	; 111
+ 12a:	94 e9       	ldi	r25, 0x94	; 148
+ 12c:	9b bd       	out	0x2b, r25	; 43
+ 12e:	8a bd       	out	0x2a, r24	; 42
+ 130:	1c c0       	rjmp	.+56     	; 0x16a <__vector_7+0x64>
+		}
+		else
+		{
+			open_door_flag = 1;
+ 132:	81 e0       	ldi	r24, 0x01	; 1
+ 134:	80 93 63 00 	sts	0x0063, r24	; 0x800063 <open_door_flag.1747>
+			OCR1A = NO_TICKS_MS(1);
+ 138:	8f ec       	ldi	r24, 0xCF	; 207
+ 13a:	97 e0       	ldi	r25, 0x07	; 7
+ 13c:	9b bd       	out	0x2b, r25	; 43
+ 13e:	8a bd       	out	0x2a, r24	; 42
+ 140:	14 c0       	rjmp	.+40     	; 0x16a <__vector_7+0x64>
+		}
+	}
+	
+	//Close the door
+	//Servo go to 90 degree
+	else if(door_status == DOOR_OPENED)
+ 142:	81 11       	cpse	r24, r1
+ 144:	12 c0       	rjmp	.+36     	; 0x16a <__vector_7+0x64>
+	{
+		if(closed_door_flag)
+ 146:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <__data_end>
+ 14a:	88 23       	and	r24, r24
+ 14c:	39 f0       	breq	.+14     	; 0x15c <__vector_7+0x56>
+		{
+			closed_door_flag = 0;
+ 14e:	10 92 62 00 	sts	0x0062, r1	; 0x800062 <__data_end>
+			OCR1A = NO_TICKS_MS(18.5);
+ 152:	87 e8       	ldi	r24, 0x87	; 135
+ 154:	90 e9       	ldi	r25, 0x90	; 144
+ 156:	9b bd       	out	0x2b, r25	; 43
+ 158:	8a bd       	out	0x2a, r24	; 42
+ 15a:	07 c0       	rjmp	.+14     	; 0x16a <__vector_7+0x64>
+		}
+		else
+		{
+			closed_door_flag = 1;
+ 15c:	81 e0       	ldi	r24, 0x01	; 1
+ 15e:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <__data_end>
+			OCR1A = NO_TICKS_MS(1.5);
+ 162:	87 eb       	ldi	r24, 0xB7	; 183
+ 164:	9b e0       	ldi	r25, 0x0B	; 11
+ 166:	9b bd       	out	0x2b, r25	; 43
+ 168:	8a bd       	out	0x2a, r24	; 42
+		}
+	}
+ 16a:	9f 91       	pop	r25
+ 16c:	8f 91       	pop	r24
+ 16e:	0f 90       	pop	r0
+ 170:	0f be       	out	0x3f, r0	; 63
+ 172:	0f 90       	pop	r0
+ 174:	1f 90       	pop	r1
+ 176:	18 95       	reti
+
+00000178 <SPI_slave_init>:
+
+void SPI_send_char(uint8 data)
+{
+	SPDR = data;
+	while(READBIT(SPSR, SPIF) == 0);   //wait for transmission complete
+}
+ 178:	be 9a       	sbi	0x17, 6	; 23
+ 17a:	6e 9a       	sbi	0x0d, 6	; 13
+ 17c:	6b 98       	cbi	0x0d, 3	; 13
+ 17e:	6a 98       	cbi	0x0d, 2	; 13
+ 180:	08 95       	ret
+
+00000182 <SPI_receive_char>:
+
+uint8 SPI_receive_char()
+{
+	while(READBIT(SPSR, SPIF) == 0);   //wait for reception complete
+ 182:	77 9b       	sbis	0x0e, 7	; 14
+ 184:	fe cf       	rjmp	.-4      	; 0x182 <SPI_receive_char>
+	return SPDR;
+ 186:	8f b1       	in	r24, 0x0f	; 15
+ 188:	08 95       	ret
+
+0000018a <timer_1A_ctc_init>:
+
+#include "Timer1.h"
+
+void timer_1A_ctc_init()
+{
+	SETBIT(DDRD, PD5);
+ 18a:	8d 9a       	sbi	0x11, 5	; 17
+	// Toggle OC1A on compare match COM1A1:0 --> ob01
+	SETBIT(TCCR1A, COM1A0); 
+ 18c:	8f b5       	in	r24, 0x2f	; 47
+ 18e:	80 64       	ori	r24, 0x40	; 64
+ 190:	8f bd       	out	0x2f, r24	; 47
+	
+	SETBIT(TCCR1A, FOC1A);
+ 192:	8f b5       	in	r24, 0x2f	; 47
+ 194:	88 60       	ori	r24, 0x08	; 8
+ 196:	8f bd       	out	0x2f, r24	; 47
+	
+	//Select CTC mode
+	SETBIT(TCCR1B, WGM12);
+ 198:	8e b5       	in	r24, 0x2e	; 46
+ 19a:	88 60       	ori	r24, 0x08	; 8
+ 19c:	8e bd       	out	0x2e, r24	; 46
+	
+	//Output Compare A Match Interrupt Enable
+	SETBIT(TIMSK, OCIE1A);
+ 19e:	89 b7       	in	r24, 0x39	; 57
+ 1a0:	80 61       	ori	r24, 0x10	; 16
+ 1a2:	89 bf       	out	0x39, r24	; 57
+	
+	//Enable global interrupt
+	SETBIT(SREG, 7);
+ 1a4:	8f b7       	in	r24, 0x3f	; 63
+ 1a6:	80 68       	ori	r24, 0x80	; 128
+ 1a8:	8f bf       	out	0x3f, r24	; 63
+ 1aa:	08 95       	ret
+
+000001ac <timer_1A_start>:
+}
+
+void timer_1A_start()
+{
+	TCCR1B &= ~((1<<CS12)|(1<<CS11)|(1<<CS10));
+ 1ac:	8e b5       	in	r24, 0x2e	; 46
+ 1ae:	88 7f       	andi	r24, 0xF8	; 248
+ 1b0:	8e bd       	out	0x2e, r24	; 46
+	
+#if PRESCALER == 8
+	SETBIT(TCCR1B, CS11);
+ 1b2:	8e b5       	in	r24, 0x2e	; 46
+ 1b4:	82 60       	ori	r24, 0x02	; 2
+ 1b6:	8e bd       	out	0x2e, r24	; 46
+ 1b8:	08 95       	ret
+
+000001ba <_exit>:
+ 1ba:	f8 94       	cli
+
+000001bc <__stop_program>:
+ 1bc:	ff cf       	rjmp	.-2      	; 0x1bc <__stop_program>
